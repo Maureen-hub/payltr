@@ -1,17 +1,28 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './Hero.css';
 
 export const Hero: React.FC = () => {
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
   return (
     <section className="hero">
       <nav className="navbar">
         <div className="nav-content">
           <div className="logo">PayLTR</div>
-          <div className="nav-links">
-            <a href="#products">Producten</a>
-            <a href="#how-it-works">Hoe het werkt</a>
-            <a href="#about">Over ons</a>
-            <a href="#contact" className="cta-button">Start vandaag</a>
+          
+          <button 
+            className="mobile-menu-toggle"
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            aria-label="Toggle menu"
+          >
+            {mobileMenuOpen ? '✕' : '☰'}
+          </button>
+
+          <div className={`nav-links ${mobileMenuOpen ? 'mobile-open' : ''}`}>
+            <a href="#products" onClick={() => setMobileMenuOpen(false)}>Producten</a>
+            <a href="#how-it-works" onClick={() => setMobileMenuOpen(false)}>Hoe het werkt</a>
+            <a href="#about" onClick={() => setMobileMenuOpen(false)}>Over ons</a>
+            <a href="#contact" className="cta-button" onClick={() => setMobileMenuOpen(false)}>Start vandaag</a>
           </div>
         </div>
       </nav>
