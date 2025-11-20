@@ -1,16 +1,21 @@
 'use client';
 
 import { useTranslation } from 'react-i18next';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 export function LanguageSwitcher() {
   const { i18n, t } = useTranslation('common');
   const [isOpen, setIsOpen] = useState(false);
+  const [mounted, setMounted] = useState(false);
 
-  const currentLanguage = i18n.language;
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  const currentLanguage = i18n.language || 'nl';
   const languages = [
-    { code: 'nl', name: t('language.dutch'), flag: '🇳🇱' },
-    { code: 'en', name: t('language.english'), flag: '🇬🇧' },
+    { code: 'nl', name: mounted ? t('language.dutch') : 'Nederlands', flag: '🇳🇱' },
+    { code: 'en', name: mounted ? t('language.english') : 'English', flag: '🇬🇧' },
   ];
 
   const changeLanguage = (lng: string) => {
