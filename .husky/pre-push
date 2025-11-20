@@ -1,0 +1,21 @@
+#!/bin/bash
+
+# Block direct push to main
+while read local_ref local_sha remote_ref remote_sha
+do
+  if [[ "$remote_ref" == "refs/heads/main" ]]; then
+    echo "❌ Pushing directly to the main branch is not allowed."
+    exit 1
+  fi
+done
+
+echo "🧹 Running lint-staged before push..."
+npx lint-staged
+status=$?
+
+if [ $status -ne 0 ]; then
+  echo "❌ Linting failed. Fix issues before pushing."
+  exit 1
+fi
+
+exit 0
