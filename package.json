@@ -1,24 +1,48 @@
 {
-  "name": "react-typescript",
-  "version": "1.0.0",
-  "type": "module",
-  "description": "React TypeScript on Replit, using Vite bundler",
+  "name": "payltr",
+  "version": "2.0.0",
+  "description": "PayLTR - Cashflow-as-a-Service Platform for Dutch SMEs",
   "scripts": {
-    "dev": "vite",
-    "build": "tsc && vite build",
-    "preview": "vite preview"
+    "dev": "next dev -p 5000",
+    "build": "next build",
+    "start": "next start -p 5000",
+    "lint": "next lint"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@types/node": "^24.10.1",
     "@types/react": "^18.0.15",
     "@types/react-dom": "^18.0.6",
     "@vitejs/plugin-react": "^2.0.0",
+<<<<<<< HEAD
     "husky": "^9.1.7",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "typescript": "^4.7.4",
+=======
+    "autoprefixer": "^10.4.22",
+    "eslint": "^9.39.1",
+    "eslint-config-next": "^16.0.3",
+    "postcss": "^8.5.6",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0",
+    "tailwindcss": "^4.1.17",
+    "typescript": "^5.9.3",
+>>>>>>> 89c7f7f (Set up the new project with Next.js, Tailwind CSS, and internationalization)
     "vite": "^3.0.4"
+  },
+  "dependencies": {
+    "@hookform/resolvers": "^5.2.2",
+    "@tanstack/react-query": "^5.90.10",
+    "i18next": "^25.6.3",
+    "i18next-browser-languagedetector": "^8.2.0",
+    "i18next-http-backend": "^3.0.2",
+    "next": "^16.0.3",
+    "react-hook-form": "^7.66.1",
+    "react-i18next": "^16.3.5",
+    "recharts": "^3.4.1",
+    "zod": "^4.1.12"
   }
 }

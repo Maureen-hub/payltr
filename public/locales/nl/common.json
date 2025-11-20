@@ -1,0 +1,18 @@
+{
+  "nav": {
+    "products": "Producten",
+    "howItWorks": "Hoe het werkt",
+    "about": "Over ons",
+    "startToday": "Start vandaag"
+  },
+  "cta": {
+    "apply": "Aanvraag starten",
+    "learnMore": "Meer informatie",
+    "discover": "Ontdek mogelijkheden"
+  },
+  "language": {
+    "dutch": "Nederlands",
+    "english": "English",
+    "switchTo": "Wissel naar"
+  }
+}

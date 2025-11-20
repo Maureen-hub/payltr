@@ -1,0 +1,131 @@
+{
+  "hero": {
+    "title": "Cashflow-as-a-Service for",
+    "titleHighlight": "Dutch entrepreneurs",
+    "subtitle": "Flexible BNPL solutions for SMEs. Improve your cashflow with smart payment terms, integrated with your bank and credit assessment.",
+    "cta": "Start application"
+  },
+  "stats": {
+    "funding": "€50M+",
+    "fundingLabel": "Approved funding",
+    "businesses": "1,200+",
+    "businessesLabel": "Dutch businesses",
+    "decision": "24h",
+    "decisionLabel": "Time to decision",
+    "satisfaction": "98%",
+    "satisfactionLabel": "Customer satisfaction"
+  },
+  "products": {
+    "title": "Our solutions",
+    "subtitle": "Three integrated services for complete cashflow control",
+    "ponto": {
+      "name": "Ponto Integration",
+      "description": "Direct bank connection via PSD2. Real-time insight into your cashflow and automatic data extraction for faster approvals.",
+      "features": {
+        "openBanking": "Open Banking via PSD2",
+        "multiBank": "Multi-bank support",
+        "secureExchange": "Secure data exchange",
+        "autoSync": "Automatic synchronization"
+      }
+    },
+    "algoan": {
+      "name": "Algoan Credit Scoring",
+      "description": "Advanced credit assessment with AI. Get a decision within 24 hours based on real-time business data and predictive analysis.",
+      "badge": "Most popular",
+      "features": {
+        "aiDriven": "AI-driven assessment",
+        "fastDecision": "Decision within 24 hours",
+        "transparent": "Transparent assessment process",
+        "highApproval": "Higher approval ratio"
+      }
+    },
+    "qred": {
+      "name": "Qred Financing",
+      "description": "Flexible financing solutions up to €500,000. Pay invoices in installments or get working capital directly to your account.",
+      "features": {
+        "upTo": "Up to €500,000 credit",
+        "flexible": "Flexible repayment 3-12 months",
+        "noHidden": "No hidden costs",
+        "fast": "Funding within 24 hours"
+      }
+    }
+  },
+  "howItWorks": {
+    "title": "How it works",
+    "subtitle": "Three simple steps to better cashflow",
+    "step1": {
+      "title": "Connect your bank",
+      "description": "Securely link your bank account via Ponto (PSD2). We analyze your cashflow automatically and confidentially."
+    },
+    "step2": {
+      "title": "Receive your assessment",
+      "description": "Algoan's AI analyzes your business data and provides a credit decision within 24 hours with transparent terms."
+    },
+    "step3": {
+      "title": "Get your financing",
+      "description": "Approved? Qred provides your financing. Pay invoices in installments or receive working capital immediately."
+    }
+  },
+  "benefits": {
+    "title": "Why PayLTR",
+    "items": {
+      "fast": {
+        "title": "Quick decisions",
+        "description": "Get certainty within 24 hours. No weeks of waiting, but immediate clarity about your credit possibilities."
+      },
+      "smb": {
+        "title": "Built for SMEs",
+        "description": "Flexible and practical. Financing solutions built for you, not the other way around. Understanding what entrepreneurs really need."
+      },
+      "entrepreneurs": {
+        "title": "Entrepreneurs helping entrepreneurs",
+        "description": "Founded by entrepreneurs who have experienced the frustrations of traditional financing themselves. We understand your challenges."
+      },
+      "secure": {
+        "title": "Secure & transparent",
+        "description": "Bank-level security with PSD2. Transparent terms without hidden costs or fine print."
+      },
+      "approval": {
+        "title": "Higher approval ratio",
+        "description": "Our AI-driven assessment looks beyond traditional banks. More opportunities for growing businesses."
+      },
+      "flexible": {
+        "title": "Flexible terms",
+        "description": "Choose the repayment term that suits you: from 3 to 12 months. Adjust based on your cashflow needs."
+      }
+    }
+  },
+  "finalCta": {
+    "title": "Ready to improve your cashflow?",
+    "subtitle": "Start today and get clarity about your possibilities within 24 hours. No obligations, only opportunities.",
+    "button": "Start your application",
+    "subtext": "Average approval within 24 hours • No hidden costs"
+  },
+  "footer": {
+    "tagline": "Cashflow-as-a-Service for Dutch entrepreneurs",
+    "poweredBy": "Powered by:",
+    "sections": {
+      "products": {
+        "title": "Products",
+        "ponto": "Ponto Integration",
+        "algoan": "Algoan Credit Scoring",
+        "qred": "Qred Financing"
+      },
+      "company": {
+        "title": "Company",
+        "about": "About us",
+        "howItWorks": "How it works",
+        "contact": "Contact",
+        "faq": "FAQ"
+      },
+      "legal": {
+        "title": "Legal",
+        "privacy": "Privacy policy",
+        "terms": "Terms",
+        "security": "Security"
+      }
+    },
+    "copyright": "© 2025 PayLTR. All rights reserved.",
+    "disclaimer": "PayLTR is a financial service provider registered in the Netherlands. Financing subject to approval."
+  }
+}

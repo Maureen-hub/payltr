@@ -1,0 +1,131 @@
+{
+  "hero": {
+    "title": "Cashflow-as-a-Service voor",
+    "titleHighlight": "Nederlandse ondernemers",
+    "subtitle": "Flexibele BNPL-oplossingen voor MKB. Verbeter je cashflow met slimme betalingstermijnen, geïntegreerd met je bank en kredietbeoordeling.",
+    "cta": "Aanvraag starten"
+  },
+  "stats": {
+    "funding": "€50M+",
+    "fundingLabel": "Goedgekeurde financiering",
+    "businesses": "1.200+",
+    "businessesLabel": "Nederlandse bedrijven",
+    "decision": "24u",
+    "decisionLabel": "Tijd tot beslissing",
+    "satisfaction": "98%",
+    "satisfactionLabel": "Klanttevredenheid"
+  },
+  "products": {
+    "title": "Onze oplossingen",
+    "subtitle": "Drie geïntegreerde diensten voor complete cashflow controle",
+    "ponto": {
+      "name": "Ponto Integratie",
+      "description": "Directe bankkoppeling via PSD2. Realtime inzicht in je cashflow en automatische data-extractie voor snellere goedkeuringen.",
+      "features": {
+        "openBanking": "Open Banking via PSD2",
+        "multiBank": "Multi-bank ondersteuning",
+        "secureExchange": "Veilige data-uitwisseling",
+        "autoSync": "Automatische synchronisatie"
+      }
+    },
+    "algoan": {
+      "name": "Algoan Credit Scoring",
+      "description": "Geavanceerde kredietbeoordeling met AI. Krijg binnen 24 uur een beslissing gebaseerd op realtime bedrijfsdata en voorspellende analyses.",
+      "badge": "Meest populair",
+      "features": {
+        "aiDriven": "AI-gedreven beoordeling",
+        "fastDecision": "Beslissing binnen 24 uur",
+        "transparent": "Transparant beoordelingsproces",
+        "highApproval": "Hogere goedkeuringsratio"
+      }
+    },
+    "qred": {
+      "name": "Qred Financiering",
+      "description": "Flexibele financieringsoplossingen tot €500.000. Betaal facturen in termijnen of krijg direct werkkapitaal op je rekening.",
+      "features": {
+        "upTo": "Tot €500.000 krediet",
+        "flexible": "Flexibele terugbetaling 3-12 maanden",
+        "noHidden": "Geen verborgen kosten",
+        "fast": "Geld binnen 24 uur"
+      }
+    }
+  },
+  "howItWorks": {
+    "title": "Zo werkt het",
+    "subtitle": "In drie eenvoudige stappen naar betere cashflow",
+    "step1": {
+      "title": "Verbind je bank",
+      "description": "Koppel je bankrekening veilig via Ponto (PSD2). Wij analyseren je cashflow automatisch en vertrouwelijk."
+    },
+    "step2": {
+      "title": "Ontvang je beoordeling",
+      "description": "Algoan's AI analyseert je bedrijfsdata en geeft binnen 24 uur een kredietbeslissing met transparante voorwaarden."
+    },
+    "step3": {
+      "title": "Krijg je financiering",
+      "description": "Goedgekeurd? Qred zorgt voor je financiering. Betaal facturen in termijnen of ontvang direct werkkapitaal."
+    }
+  },
+  "benefits": {
+    "title": "Waarom PayLTR",
+    "items": {
+      "fast": {
+        "title": "Snelle beslissingen",
+        "description": "Krijg binnen 24 uur zekerheid. Geen wekenlange wachttijden, maar directe duidelijkheid over je kredietmogelijkheden."
+      },
+      "smb": {
+        "title": "Speciaal voor MKB",
+        "description": "Flexibel en praktisch. Financieringsoplossingen gebouwd voor jou, niet andersom. Begrijpen wat ondernemers echt nodig hebben."
+      },
+      "entrepreneurs": {
+        "title": "Ondernemers helpen ondernemers",
+        "description": "Opgericht door ondernemers die zelf de frustraties van traditionele financiering hebben ervaren. Wij snappen je uitdagingen."
+      },
+      "secure": {
+        "title": "Veilig & transparant",
+        "description": "Bank-niveau beveiliging met PSD2. Transparante voorwaarden zonder verborgen kosten of kleine lettertjes."
+      },
+      "approval": {
+        "title": "Hogere goedkeuringsratio",
+        "description": "Onze AI-gedreven beoordeling kijkt verder dan traditionele banken. Meer kansen voor groeiende bedrijven."
+      },
+      "flexible": {
+        "title": "Flexibele voorwaarden",
+        "description": "Kies de terugbetalingstermijn die bij jou past: van 3 tot 12 maanden. Pas aan op basis van je cashflow behoefte."
+      }
+    }
+  },
+  "finalCta": {
+    "title": "Klaar om je cashflow te verbeteren?",
+    "subtitle": "Start vandaag en krijg binnen 24 uur duidelijkheid over je mogelijkheden. Geen verplichtingen, alleen kansen.",
+    "button": "Start je aanvraag",
+    "subtext": "Gemiddelde goedkeuring binnen 24 uur • Geen verborgen kosten"
+  },
+  "footer": {
+    "tagline": "Cashflow-as-a-Service voor Nederlandse ondernemers",
+    "poweredBy": "Mogelijk gemaakt door:",
+    "sections": {
+      "products": {
+        "title": "Producten",
+        "ponto": "Ponto Integratie",
+        "algoan": "Algoan Credit Scoring",
+        "qred": "Qred Financiering"
+      },
+      "company": {
+        "title": "Bedrijf",
+        "about": "Over ons",
+        "howItWorks": "Hoe het werkt",
+        "contact": "Contact",
+        "faq": "FAQ"
+      },
+      "legal": {
+        "title": "Juridisch",
+        "privacy": "Privacy beleid",
+        "terms": "Voorwaarden",
+        "security": "Beveiliging"
+      }
+    },
+    "copyright": "© 2025 PayLTR. Alle rechten voorbehouden.",
+    "disclaimer": "PayLTR is een financiële dienstverlener geregistreerd in Nederland. Financiering onder voorbehoud van goedkeuring."
+  }
+}
