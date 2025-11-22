@@ -1,11 +1,15 @@
 
+using System.Text;
 using Microsoft.AspNetCore.Hosting.Server;
 using Microsoft.AspNetCore.Hosting.Server.Features;
+using Microsoft.IdentityModel.Tokens;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using Payltr.Data;
 using Payltr.Interfaces;
 using Payltr.Services;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -17,6 +21,40 @@ builder.Services.AddDbContext<PayltrDbContext>(options =>
 
 // Register services
 builder.Services.AddScoped<IUserService, UserService>();
+
+// ---------------------------
+// JWT Configuration
+// ---------------------------
+builder.Services.Configure<JwtSettings>(builder.Configuration.GetSection("JwtSettings"));
+var jwtSettings = builder.Configuration
+    .GetSection("JwtSettings")
+    .Get<JwtSettings>();
+
+if (jwtSettings == null)
+{
+    throw new InvalidOperationException("JWT configuration is missing in appsettings.json.");
+}
+
+var key = Encoding.ASCII.GetBytes(jwtSettings.Secret!);
+
+builder.Services.AddAuthentication(options =>
+{
+    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+})
+.AddJwtBearer(options =>
+{
+    options.RequireHttpsMetadata = false;
+    options.SaveToken = true;
+    options.TokenValidationParameters = new TokenValidationParameters
+    {
+        ValidateIssuer = false,
+        ValidateAudience = false,
+        ValidateIssuerSigningKey = true,
+        IssuerSigningKey = new SymmetricSecurityKey(key),
+        ValidateLifetime = true
+    };
+});
 
 builder.Services.AddControllers()
     .AddJsonOptions(options =>
@@ -57,6 +95,7 @@ if (app.Environment.IsDevelopment())
 app.UseCors("AllowFrontend");
 
 app.UseMiddleware<ExceptionMiddleware>();
+app.UseAuthentication();
 app.UseAuthorization();
 app.MapControllers();
 
