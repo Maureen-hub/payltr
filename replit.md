@@ -6,7 +6,14 @@ PayLTR is a modern B2B BNPL (Buy Now Pay Later) platform delivering "Cashflow-as
 **Current State:** Production-ready Next.js 16 application with full internationalization (Dutch/English), Tailwind CSS design system, and WCAG 2.1 accessibility compliance.
 
 ## Recent Changes
-*Last updated: November 20, 2025*
+*Last updated: November 22, 2025*
+
+### Navigation Enhancement (November 22, 2025)
+- ✅ **Added Sign In/Dashboard link** to Hero navigation (desktop and mobile)
+- ✅ **Implemented login state detection** - checks localStorage and displays appropriate link
+- ✅ **Added i18n translations** - "Inloggen" (Dutch) / "Sign In" (English), "Dashboard" in both languages
+- ✅ **Maintained accessibility** - proper ARIA roles in mobile menu
+- ✅ **Architect-reviewed and approved** - Production-ready
 
 ### Migration to Next.js 16 (November 20, 2025)
 - ✅ **Migrated from Vite to Next.js 16** with App Router and Turbopack
