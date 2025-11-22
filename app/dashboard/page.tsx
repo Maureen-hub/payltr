@@ -1,8 +1,8 @@
 'use client';
 
-import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
+import { useEffect, useState } from 'react';
 
 interface CurrentUser {
   email: string;
@@ -11,20 +11,14 @@ interface CurrentUser {
 
 export default function DashboardPage() {
   const router = useRouter();
-  const [user, setUser] = useState<CurrentUser | null>(null);
+  const [user, setUser] = useState<CurrentUser>({ name: 'User', email: 'user@company.nl' });
 
   useEffect(() => {
     const currentUserStr = localStorage.getItem('currentUser');
-    if (!currentUserStr) {
-      router.replace('/login');
-      return;
+    if (currentUserStr) {
+      setUser(JSON.parse(currentUserStr));
     }
-    setUser(JSON.parse(currentUserStr));
-  }, [router]);
-
-  if (!user) {
-    return null;
-  }
+  }, []);
 
   const handleLogout = () => {
     localStorage.removeItem('currentUser');
