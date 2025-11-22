@@ -1,0 +1,14 @@
+cat << 'EOF' > .husky/pre-push
+#!/usr/bin/env sh
+. "$(dirname "$0")/_/husky.sh"
+
+BRANCH="$(git rev-parse --abbrev-ref HEAD)"
+
+if [ "$BRANCH" = "main" ]; then
+  echo "Direct pushes to main are blocked. Open a PR instead."
+  exit 1
+fi
+
+echo "Running pre-push checks..."
+npm run lint
+EOF

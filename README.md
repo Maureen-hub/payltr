@@ -2,7 +2,7 @@
 
 A modern B2B BNPL (Buy Now Pay Later) platform delivering "Cashflow-as-a-Service" to Dutch entrepreneurs and SMEs.
 
-## Overview 
+## Overview
 
 PayLTR provides flexible financing solutions integrated with three trusted third-party services:
 - **Ponto** - PSD2 bank connection for real-time cashflow analysis

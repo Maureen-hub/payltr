@@ -1,0 +1,14 @@
+cat << 'EOF' > .husky/pre-commit
+#!/usr/bin/env sh
+. "$(dirname "$0")/_/husky.sh"
+
+BRANCH="$(git rev-parse --abbrev-ref HEAD)"
+
+if [ "$BRANCH" = "main" ]; then
+  echo "Commits to main are blocked. Please use a feature branch."
+  exit 1
+fi
+
+echo "Running pre-commit checks..."
+npm run lint
+EOF
