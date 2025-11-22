@@ -9,8 +9,22 @@ interface CurrentUser {
   name: string;
 }
 
-function DashboardContent({ user }: { user: CurrentUser }) {
+export default function DashboardPage() {
   const router = useRouter();
+  const [user, setUser] = useState<CurrentUser | null>(null);
+
+  useEffect(() => {
+    const currentUserStr = localStorage.getItem('currentUser');
+    if (!currentUserStr) {
+      router.replace('/login');
+      return;
+    }
+    setUser(JSON.parse(currentUserStr));
+  }, [router]);
+
+  if (!user) {
+    return null;
+  }
 
   const handleLogout = () => {
     localStorage.removeItem('currentUser');
@@ -83,28 +97,4 @@ function DashboardContent({ user }: { user: CurrentUser }) {
       </div>
     </div>
   );
-}
-
-export default function DashboardPage() {
-  const router = useRouter();
-  const [user, setUser] = useState<CurrentUser | null>(null);
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    setMounted(true);
-    const currentUserStr = localStorage.getItem('currentUser');
-    if (!currentUserStr) {
-      router.push('/login');
-      return;
-    }
-    setUser(JSON.parse(currentUserStr));
-  }, [router]);
-
-  if (!mounted || !user) {
-    return (
-      <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900" />
-    );
-  }
-
-  return <DashboardContent user={user} />;
 }
