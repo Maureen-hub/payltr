@@ -1,9 +1,9 @@
-cat << 'EOF' > .husky/_/husky.sh
-#!/usr/bin/env sh
+echo "husky - DEPRECATED
 
-# Husky v9 shim
-if [ -z "$husky_skip_init" ]; then
-  export husky_skip_init=1
-  sh -e "$0" "$@" || exit 1
-fi
-EOF
+Please remove the following two lines from $0:
+
+#!/usr/bin/env sh
+. \"\$(dirname -- \"\$0\")/_/husky.sh\"
+
+They WILL FAIL in v10.0.0
+"

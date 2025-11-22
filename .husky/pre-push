@@ -1,14 +1,7 @@
-cat << 'EOF' > .husky/pre-push
-#!/usr/bin/env sh
-. "$(dirname "$0")/_/husky.sh"
+# Get the current local branch
+branch="$(git symbolic-ref --short HEAD)"
 
-BRANCH="$(git rev-parse --abbrev-ref HEAD)"
-
-if [ "$BRANCH" = "main" ]; then
-  echo "Direct pushes to main are blocked. Open a PR instead."
+if [ "$branch" = "main" ]; then
+  echo "Error: pushing directly from main branch is not allowed."
   exit 1
 fi
-
-echo "Running pre-push checks..."
-npm run lint
-EOF
