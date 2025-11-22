@@ -9,29 +9,13 @@ interface CurrentUser {
   name: string;
 }
 
-export default function DashboardPage() {
+function DashboardContent({ user }: { user: CurrentUser }) {
   const router = useRouter();
-  const [user, setUser] = useState<CurrentUser | null>(null);
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    setMounted(true);
-    const currentUserStr = localStorage.getItem('currentUser');
-    if (!currentUserStr) {
-      router.push('/login');
-      return;
-    }
-    setUser(JSON.parse(currentUserStr));
-  }, [router]);
 
   const handleLogout = () => {
     localStorage.removeItem('currentUser');
     router.push('/');
   };
-
-  if (!mounted || !user) {
-    return null;
-  }
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900">
@@ -99,4 +83,28 @@ export default function DashboardPage() {
       </div>
     </div>
   );
+}
+
+export default function DashboardPage() {
+  const router = useRouter();
+  const [user, setUser] = useState<CurrentUser | null>(null);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+    const currentUserStr = localStorage.getItem('currentUser');
+    if (!currentUserStr) {
+      router.push('/login');
+      return;
+    }
+    setUser(JSON.parse(currentUserStr));
+  }, [router]);
+
+  if (!mounted || !user) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900" />
+    );
+  }
+
+  return <DashboardContent user={user} />;
 }
