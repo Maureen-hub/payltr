@@ -2,11 +2,18 @@
 
 import { useTranslation } from 'react-i18next';
 import { LanguageSwitcher } from '../LanguageSwitcher';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import Link from 'next/link';
 
 export function Hero() {
   const { t } = useTranslation(['home', 'common']);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  useEffect(() => {
+    const currentUser = localStorage.getItem('currentUser');
+    setIsLoggedIn(!!currentUser);
+  }, []);
 
   return (
     <section className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white">
@@ -46,6 +53,12 @@ export function Hero() {
                 {t('common:nav.about')}
               </a>
               <LanguageSwitcher />
+              <Link
+                href={isLoggedIn ? "/dashboard" : "/login"}
+                className="text-white/80 hover:text-white transition-colors font-medium"
+              >
+                {isLoggedIn ? t('common:nav.dashboard') : t('common:nav.signIn')}
+              </Link>
               <a
                 href="#contact"
                 className="gradient-primary px-6 py-3 rounded-lg font-semibold hover:shadow-lg hover:shadow-primary-500/50 transition-all duration-300"
@@ -85,6 +98,14 @@ export function Hero() {
               <div className="pt-2">
                 <LanguageSwitcher />
               </div>
+              <Link
+                href={isLoggedIn ? "/dashboard" : "/login"}
+                className="block text-white/80 hover:text-white transition-colors font-medium py-2"
+                onClick={() => setMobileMenuOpen(false)}
+                role="menuitem"
+              >
+                {isLoggedIn ? t('common:nav.dashboard') : t('common:nav.signIn')}
+              </Link>
               <a
                 href="#contact"
                 className="block gradient-primary px-6 py-3 rounded-lg font-semibold text-center"
