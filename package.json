@@ -3,9 +3,10 @@
   "version": "2.0.0",
   "description": "PayLTR - Cashflow-as-a-Service Platform for Dutch SMEs",
   "scripts": {
-    "dev": "next dev -p 5000",
+    "dev": "next dev -p 5100",
     "build": "next build",
     "start": "next start -p 5000",
+    "dev:backend": "cd backend && dotnet restore && dotnet build && dotnet run --framework net9.0",
     "lint": "next lint",
     "prepare": "husky"
   },

@@ -55,7 +55,20 @@ public class UsersController : ControllerBase
             Email = request.Email
         };
 
+        // Register user
         var createdUser = await _authService.RegisterAsync(user, request.Password);
+
+        // Generate JWT using your existing login method
+        var token = await _authService.LoginAsync(request.Email, request.Password);
+
+        // Set JWT as HttpOnly cookie
+        Response.Cookies.Append("jwt", token, new CookieOptions
+        {
+            HttpOnly = true,
+            Secure = false,             // true in production with HTTPS
+            SameSite = SameSiteMode.None // required for cross-origin
+        });
+
         return Ok(createdUser);
     }
 
@@ -63,7 +76,15 @@ public class UsersController : ControllerBase
     public async Task<IActionResult> Login([FromBody] LoginRequest request)
     {
         var token = await _authService.LoginAsync(request.Email, request.Password);
-        return Ok(new { Token = token });
+
+        Response.Cookies.Append("jwt", token, new CookieOptions
+        {
+            HttpOnly = true,
+            Secure = true, // true in production
+            SameSite = SameSiteMode.None
+        });
+
+        return Ok(new { Message = "Logged in successfully" });
     }
 
     [HttpPost("reset-password")]
@@ -73,9 +94,12 @@ public class UsersController : ControllerBase
         if (!success) return NotFound("User not found");
         return Ok("Password reset successfully");
     }
-}
 
-// DTOs
-public record SignUpRequest(string FirstName, string LastName, string Email, string Password);
-public record LoginRequest(string Email, string Password);
-public record ResetPasswordRequest(string Email, string NewPassword);
+    [HttpGet("verify-email")]
+    public async Task<IActionResult> VerifyEmail([FromQuery] string token)
+    {
+        var result = await _authService.VerifyEmailAsync(token);
+        if (!result) return BadRequest("Invalid or expired token");
+        return Ok("Email verified successfully");
+    }
+}

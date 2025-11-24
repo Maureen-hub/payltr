@@ -19,26 +19,35 @@ export function SignupForm() {
     resolver: zodResolver(signupSchema),
   });
 
+   const API_URL = process.env.NEXT_PUBLIC_API_URL;
+
   const onSubmit = async (data: SignupInput) => {
     setIsLoading(true);
     try {
-      // Simulate API call - store in localStorage for demo
-      const users = JSON.parse(localStorage.getItem('users') || '[]');
-      
-      if (users.find((u: any) => u.email === data.email)) {
-        setError('email', { message: 'Email already registered' });
+      const response = await fetch(`${API_URL}/users/register`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          firstName: data.name.split(' ')[0],
+          lastName: data.name.split(' ').slice(1).join(' ') || '',
+          email: data.email,
+          password: data.password,
+        }),
+        credentials: 'include',
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        setError('email', {
+          message: errorData?.message || 'Failed to register',
+        });
         return;
       }
 
-      users.push({
-        name: data.name,
-        email: data.email,
-        password: data.password,
-      });
-
-      localStorage.setItem('users', JSON.stringify(users));
-      localStorage.setItem('currentUser', JSON.stringify({ email: data.email, name: data.name }));
       router.push('/dashboard');
+    } catch (error) {
+      console.error('Signup error', error);
+      setError('email', { message: 'Server error, please try again later' });
     } finally {
       setIsLoading(false);
     }
@@ -47,7 +56,10 @@ export function SignupForm() {
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
       <div>
-        <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">
+        <label
+          htmlFor="name"
+          className="block text-sm font-medium text-gray-700 mb-1"
+        >
           Full name
         </label>
         <input
@@ -57,11 +69,16 @@ export function SignupForm() {
           className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500"
           placeholder="Jan Jansen"
         />
-        {errors.name && <p className="mt-1 text-sm text-red-600">{errors.name.message}</p>}
+        {errors.name && (
+          <p className="mt-1 text-sm text-red-600">{errors.name.message}</p>
+        )}
       </div>
 
       <div>
-        <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
+        <label
+          htmlFor="email"
+          className="block text-sm font-medium text-gray-700 mb-1"
+        >
           Email address
         </label>
         <input
@@ -71,11 +88,16 @@ export function SignupForm() {
           className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500"
           placeholder="you@company.nl"
         />
-        {errors.email && <p className="mt-1 text-sm text-red-600">{errors.email.message}</p>}
+        {errors.email && (
+          <p className="mt-1 text-sm text-red-600">{errors.email.message}</p>
+        )}
       </div>
 
       <div>
-        <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-1">
+        <label
+          htmlFor="password"
+          className="block text-sm font-medium text-gray-700 mb-1"
+        >
           Password
         </label>
         <input
@@ -85,11 +107,16 @@ export function SignupForm() {
           className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500"
           placeholder="••••••••"
         />
-        {errors.password && <p className="mt-1 text-sm text-red-600">{errors.password.message}</p>}
+        {errors.password && (
+          <p className="mt-1 text-sm text-red-600">{errors.password.message}</p>
+        )}
       </div>
 
       <div>
-        <label htmlFor="confirmPassword" className="block text-sm font-medium text-gray-700 mb-1">
+        <label
+          htmlFor="confirmPassword"
+          className="block text-sm font-medium text-gray-700 mb-1"
+        >
           Confirm password
         </label>
         <input
@@ -99,7 +126,11 @@ export function SignupForm() {
           className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500"
           placeholder="••••••••"
         />
-        {errors.confirmPassword && <p className="mt-1 text-sm text-red-600">{errors.confirmPassword.message}</p>}
+        {errors.confirmPassword && (
+          <p className="mt-1 text-sm text-red-600">
+            {errors.confirmPassword.message}
+          </p>
+        )}
       </div>
 
       <div>
@@ -114,7 +145,10 @@ export function SignupForm() {
 
       <p className="text-center text-sm text-gray-600">
         Already have an account?{' '}
-        <Link href="/login" className="text-primary-600 hover:text-primary-700 font-medium">
+        <Link
+          href="/login"
+          className="text-primary-600 hover:text-primary-700 font-medium"
+        >
           Sign in
         </Link>
       </p>
