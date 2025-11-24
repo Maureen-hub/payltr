@@ -19,20 +19,30 @@ export function LoginForm() {
     resolver: zodResolver(loginSchema),
   });
 
+    const API_URL = process.env.NEXT_PUBLIC_API_URL;
+
   const onSubmit = async (data: LoginInput) => {
     setIsLoading(true);
     try {
-      // Simulate API call - store in localStorage for demo
-      const users = JSON.parse(localStorage.getItem('users') || '[]');
-      const user = users.find((u: any) => u.email === data.email);
+      const response = await fetch(`${API_URL}/users/login`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email: data.email, password: data.password }),
+        credentials: 'include',
+      });
 
-      if (!user || user.password !== data.password) {
-        setError('email', { message: 'Invalid email or password' });
+      if (!response.ok) {
+        const errorData = await response.json();
+        setError('email', {
+          message: errorData?.message || 'Invalid email or password',
+        });
         return;
       }
 
-      localStorage.setItem('currentUser', JSON.stringify({ email: user.email, name: user.name }));
       router.push('/dashboard');
+    } catch (error) {
+      console.error('Login error', error);
+      setError('email', { message: 'Server error, please try again later' });
     } finally {
       setIsLoading(false);
     }
@@ -41,7 +51,10 @@ export function LoginForm() {
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
       <div>
-        <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
+        <label
+          htmlFor="email"
+          className="block text-sm font-medium text-gray-700 mb-1"
+        >
           Email address
         </label>
         <input
@@ -51,11 +64,16 @@ export function LoginForm() {
           className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500"
           placeholder="you@company.nl"
         />
-        {errors.email && <p className="mt-1 text-sm text-red-600">{errors.email.message}</p>}
+        {errors.email && (
+          <p className="mt-1 text-sm text-red-600">{errors.email.message}</p>
+        )}
       </div>
 
       <div>
-        <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-1">
+        <label
+          htmlFor="password"
+          className="block text-sm font-medium text-gray-700 mb-1"
+        >
           Password
         </label>
         <input
@@ -65,11 +83,16 @@ export function LoginForm() {
           className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500"
           placeholder="••••••••"
         />
-        {errors.password && <p className="mt-1 text-sm text-red-600">{errors.password.message}</p>}
+        {errors.password && (
+          <p className="mt-1 text-sm text-red-600">{errors.password.message}</p>
+        )}
       </div>
 
       <div className="flex items-center justify-between text-sm">
-        <Link href="/signup" className="text-primary-600 hover:text-primary-700 font-medium">
+        <Link
+          href="/signup"
+          className="text-primary-600 hover:text-primary-700 font-medium"
+        >
           Don't have an account?
         </Link>
         <Link href="#" className="text-gray-600 hover:text-gray-700">

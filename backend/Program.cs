@@ -20,6 +20,7 @@ builder.Services.AddDbContext<PayltrDbContext>(options =>
 );
 
 // Register services
+builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<IUserService, UserService>();
 
 // ---------------------------
@@ -69,17 +70,25 @@ builder.Services.AddSwaggerGen(c =>
 });
 
 // **CORS**
+var allowedOrigins = builder.Configuration
+    .GetSection("Cors:AllowedOrigins")
+    .Get<string[]>() ?? Array.Empty<string>();
+
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowFrontend", policy =>
     {
-        policy.WithOrigins("http://localhost:3000") // your Next.js frontend
-               .AllowAnyHeader()
-              .AllowAnyMethod();
+        policy.WithOrigins(allowedOrigins)
+              .AllowAnyHeader()
+              .AllowAnyMethod()
+              .AllowCredentials();
     });
 });
 
 var app = builder.Build();
+
+// Use the correct CORS policy
+app.UseCors("AllowFrontend");
 
 // Middleware
 if (app.Environment.IsDevelopment())
