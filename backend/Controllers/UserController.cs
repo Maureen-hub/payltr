@@ -94,4 +94,12 @@ public class UsersController : ControllerBase
         if (!success) return NotFound("User not found");
         return Ok("Password reset successfully");
     }
+
+    [HttpGet("verify-email")]
+    public async Task<IActionResult> VerifyEmail([FromQuery] string token)
+    {
+        var result = await _authService.VerifyEmailAsync(token);
+        if (!result) return BadRequest("Invalid or expired token");
+        return Ok("Email verified successfully");
+    }
 }

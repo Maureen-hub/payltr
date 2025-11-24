@@ -13,6 +13,9 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 
 var builder = WebApplication.CreateBuilder(args);
 
+// Initialize SMTP settings at app start
+EmailHelper.Initialize(builder.Configuration);
+
 // EF Core MySQL setup
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 builder.Services.AddDbContext<PayltrDbContext>(options =>

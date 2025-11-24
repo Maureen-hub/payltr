@@ -16,12 +16,15 @@ public class AuthService : IAuthService
     private readonly PayltrDbContext _context;
     private readonly IConfiguration _config;
     private readonly JwtSettings _jwtSettings;
+    private readonly string _frontendUrl;
 
     public AuthService(PayltrDbContext context, IConfiguration config, IOptions<JwtSettings> jwtOptions)
     {
         _context = context;
         _config = config;
         _jwtSettings = jwtOptions.Value;
+
+        _frontendUrl = config["Frontend:BaseUrl"] ?? throw new InvalidOperationException("Frontend URL is not configured.");
 
         if (string.IsNullOrEmpty(_jwtSettings.Secret))
             throw new InvalidOperationException("JWT secret is not configured.");
@@ -42,8 +45,25 @@ public class AuthService : IAuthService
         user.CreatedAt = DateTime.UtcNow;
         user.ModifiedAt = DateTime.UtcNow;
 
+        // Generate 256-bit email verification token
+        var tokenBytes = RandomNumberGenerator.GetBytes(32);
+        var token = Convert.ToBase64String(tokenBytes);
+
+        user.EmailVerificationToken = token;
+        user.TokenExpiry = DateTime.UtcNow.AddHours(24);
+        user.EmailVerified = false;
+
         _context.Users.Add(user);
         await _context.SaveChangesAsync();
+
+        // Send verification email
+        var verificationLink = $"{_frontendUrl}/verify-email?token={Uri.EscapeDataString(token)}";
+        var subject = "Verify your email";
+        var body = $"<p>Hi {user.FirstName},</p>" +
+                   $"<p>Thank you for registering with Payltr. Please verify your email by clicking the link below:</p>" +
+                   $"<p><a href='{verificationLink}'>Verify Email</a></p>";
+
+        await EmailHelper.SendAsync(user.Email, subject, body);
 
         return user;
     }
@@ -114,5 +134,20 @@ public class AuthService : IAuthService
         var tokenHandler = new JwtSecurityTokenHandler();
         var token = tokenHandler.CreateToken(tokenDescriptor);
         return tokenHandler.WriteToken(token);
+    }
+
+    public async Task<bool> VerifyEmailAsync(string token)
+    {
+        var user = await _context.Users.FirstOrDefaultAsync(u =>
+            u.EmailVerificationToken == token && u.TokenExpiry > DateTime.UtcNow);
+
+        if (user == null) return false;
+
+        user.EmailVerified = true;
+        user.EmailVerificationToken = null;
+        user.TokenExpiry = null;
+        await _context.SaveChangesAsync();
+
+        return true;
     }
 }

@@ -17,11 +17,16 @@ namespace Payltr.Models
         [Required]
         [EmailAddress]
         public string Email { get; set; } = string.Empty;
+
         public string PasswordHash { get; set; } = string.Empty;
         public string PasswordSalt { get; set; } = string.Empty;
         public string Phone { get; set; } = string.Empty;
         public bool IsDeleted { get; set; }
         public DateTime CreatedAt { get; set; }
         public DateTime ModifiedAt { get; set; }
+
+        public string? EmailVerificationToken { get; set; }
+        public DateTime? TokenExpiry { get; set; }
+        public bool EmailVerified { get; set; } = false;
     }
 }
